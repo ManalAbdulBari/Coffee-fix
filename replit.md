@@ -1,36 +1,66 @@
-# [Project name]
+# Coffee Fix – Faisalabad
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A premium, fully responsive single-page café website for Coffee Fix, Faisalabad's finest coffee shop. Built with a luxury dark café aesthetic featuring Framer Motion animations, glassmorphism effects, and a warm espresso/amber color palette.
 
 ## Run & Operate
 
+- `pnpm --filter @workspace/coffee-fix run dev` — run the café website (served at `/`)
 - `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
 
 ## Stack
 
 - pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- Frontend: React + Vite + Tailwind CSS
+- Animations: Framer Motion
+- Forms: react-hook-form + zod
+- Icons: lucide-react + react-icons
+- Fonts: Playfair Display (serif headings) + Inter (body)
+- API: Express 5 (api-server artifact)
+- DB: PostgreSQL + Drizzle ORM (available but not used by the café site)
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/coffee-fix/` — the café website (React + Vite, served at `/`)
+- `artifacts/coffee-fix/src/pages/Home.tsx` — main page, imports all section components
+- `artifacts/coffee-fix/src/components/` — all section components
+- `artifacts/coffee-fix/src/index.css` — color palette (coffee/amber dark theme)
+- `artifacts/api-server/` — Express API server (served at `/api`)
+- `lib/api-spec/openapi.yaml` — API contract source of truth
 
-## Architecture decisions
+## Pages & Sections
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+Single-page site with smooth-scroll navigation:
+- **Hero** — full-screen coffee image background, animated headline + CTAs
+- **About** — story, stats (4.9★, 100+ reviews, Since 2020, 2AM close)
+- **Menu** — filterable grid: Signature Coffee, Hot Drinks, Cold Coffee, Desserts, Snacks (15 items)
+- **Gallery** — masonry CSS columns with hover zoom effect
+- **Reviews** — 6 customer testimonials with star ratings
+- **Reservation** — react-hook-form table booking with confirmation modal
+- **Contact** — address, phone, Instagram, embedded Google Map
+- **Instagram Feed** — 6-post grid linking to @coffeefixpakistan
+- **Footer** — quick links, contact, social
 
-## Product
+## Extra Features
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- Loading screen: animated coffee cup spinner, fades out after 1.8s
+- Sticky glassmorphism navbar with dark mode toggle
+- Floating WhatsApp order button + scroll-to-top button (appear after 300px scroll)
+- Dark mode default, persisted to localStorage
+- Framer Motion scroll-reveal on every section
+- Menu category filtering with AnimatePresence transitions
+- Reservation confirmation modal popup
+- SEO: title, meta description, Open Graph tags
+
+## Business Details
+
+- **Name:** Coffee Fix
+- **Location:** Shop #28, Green Avenue, W Canal Rd, Raza Town, Faisalabad
+- **Phone:** +92 311 3492349
+- **Instagram:** @coffeefixpakistan
+- **Hours:** Open Daily, Closes 2:00 AM
+- **Rating:** 4.9/5 (100+ reviews)
 
 ## User preferences
 
@@ -38,7 +68,8 @@ _Populate as you build — explicit user instructions worth remembering across s
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Google Fonts `@import url()` must be the absolute first line of `index.css` — before `@import "tailwindcss"`.
+- All CSS custom property values use space-separated HSL (e.g. `25 55% 35%`) without the `hsl()` wrapper.
 
 ## Pointers
 
